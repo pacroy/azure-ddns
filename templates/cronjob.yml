@@ -2,8 +2,8 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   labels:
-    app: {{ {{ .Release.Name }} }}
-  name: {{ {{ .Release.Name }} }}
+    app: {{ .Release.Name }}
+  name: {{ .Release.Name }}
 spec:
   schedule: {{ default "*/5 * * * *" .Values.schedule | quote }}
   concurrencyPolicy: "Replace"
@@ -16,8 +16,8 @@ spec:
       template:
         metadata:
           labels:
-            parent: {{ {{ .Release.Name }} }}
-            app: {{ {{ .Release.Name }} }}
+            parent: {{ .Release.Name }}
+            app: {{ .Release.Name }}
         spec:
           containers:
           - name: azure-ddns
