@@ -1,4 +1,4 @@
-# schedule of the CronJob
+# schedule of the CronJob, omit to use default '*/5 * * * *'
 schedule: "*/5 * * * *" # Every 5 minutes
 
 # AzureAD application ID or ID URI of service principal
