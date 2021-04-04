@@ -3,7 +3,7 @@ name: azure-ddns
 description: Update Azure DNS records to mimic Dynamic DNS service
 type: application
 version: 0.1.0
-appVersion: "0.3.0"
+appVersion: "0.3.1"
 sources:
   - https://github.com/pacroy/azure-ddns
 maintainers:

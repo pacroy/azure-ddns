@@ -21,7 +21,7 @@ spec:
         spec:
           containers:
           - name: azure-ddns
-            image: ghcr.io/pacroy/azure-ddns:v0.3.0
+            image: ghcr.io/pacroy/azure-ddns:v{{ .Chart.appVersion }}
             imagePullPolicy: IfNotPresent
             env:
             - name: CLIENT_ID
