@@ -1,5 +1,7 @@
 # azure-ddns
 
+[![Lint Code Base](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml)
+
 Helm Chart to update Azure DNS records to mimic Dynamic DNS service.
 
 ## Usage
