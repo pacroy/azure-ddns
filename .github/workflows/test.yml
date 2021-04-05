@@ -1,0 +1,28 @@
+name: Test Helm Chart
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Lint Code Base
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Test Template
+        shell: bash
+        run: |
+          helm template test-release . \
+            --set clientId="4e792d3e-960d-11eb-a8b3-0242ac130003" \
+            --set clientSecret="ThisIsATestClientSecret" \
+            --set tenantId="74aa08b6-960d-11eb-a8b3-0242ac130003" \
+            --set resourceGroup="rg-mygroup" \
+            --set dnsZone="mydomain.com" \
+            --set recordNames="record1 record2" \
+            --set updateIpCommand="dig +short myotherdomain.com"
+          
