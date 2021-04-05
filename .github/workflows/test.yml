@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    name: Lint Code Base
+    name: Test Chart Template
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Code
