@@ -41,4 +41,8 @@ jobs:
           new_archive=$(git ls-files --other --exclude-standard | head -n 1)
           git add .
           git commit -am "Add ${new_archive}"
-          [ "${{ github.event_name }}" == 'push' -a "${{ github.ref }}" == 'refs/heads/main' ] && git push
+          if [ "${{ github.event_name }}" == 'push' -a "${{ github.ref }}" == 'refs/heads/main' ]; then
+            git config --local user.email "github-actions[bot]@${GITHUB_REPOSITORY/\//.}"
+            git config --local user.name "github-actions[bot]"
+            git push
+          fi
