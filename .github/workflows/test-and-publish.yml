@@ -39,10 +39,11 @@ jobs:
           helm package ..
           helm repo index .
           new_archive=$(git ls-files --other --exclude-standard | head -n 1)
+
+          git config --local user.email "github-actions[bot]@${GITHUB_REPOSITORY/\//.}"
+          git config --local user.name "github-actions[bot]"
           git add .
           git commit -am "Add ${new_archive}"
-          if [ "${{ github.event_name }}" == 'push' -a "${{ github.ref }}" == 'refs/heads/main' ]; then
-            git config --local user.email "github-actions[bot]@${GITHUB_REPOSITORY/\//.}"
-            git config --local user.name "github-actions[bot]"
+          if [ "${GITHUB_EVENT_NAME}" == 'push' -a "${GITHUB_REF}" == 'refs/heads/main' -a ${GITHUB_HEAD_REF} == "" ]; then
             git push
           fi
