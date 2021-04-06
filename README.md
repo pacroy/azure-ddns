@@ -1,6 +1,6 @@
-# azure-ddns
+# Helm Chart for azure-ddns
 
-[![Lint Code Base](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml)
+[![Lint Code Base](https://github.com/pacroy/azure-ddns-helm/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/azure-ddns-helm/actions/workflows/linter.yml) [![Test and Publish Chart](https://github.com/pacroy/azure-ddns-helm/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/pacroy/azure-ddns-helm/actions/workflows/test-and-publish.yml)
 
 Helm Chart to update Azure DNS records to mimic Dynamic DNS service.
 
@@ -48,4 +48,3 @@ helm upgrade --install <RELEASE_NAME> pacroy/azure-ddns \
 | dnsZone | DNS zone name |
 | recordNames | DNS record names, separated by space |
 | updateIpCommand | Command to get the up-to-date IP<br />Leave blank use default `curl -fsSL ipv4.icanhazip.com` to use the external IP of the host<br />Or set `dig +short myotherdomain.com` to clone IP from the other domain.  |
-

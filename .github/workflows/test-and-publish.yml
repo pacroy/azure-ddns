@@ -1,0 +1,49 @@
+name: Test and Publish Chart
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test Chart Template
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Test Template
+        shell: bash
+        run: |
+          helm template test-release . \
+            --set clientId="4e792d3e-960d-11eb-a8b3-0242ac130003" \
+            --set clientSecret="ThisIsATestClientSecret" \
+            --set tenantId="74aa08b6-960d-11eb-a8b3-0242ac130003" \
+            --set resourceGroup="rg-mygroup" \
+            --set dnsZone="mydomain.com" \
+            --set recordNames="record1 record2" \
+            --set updateIpCommand="dig +short myotherdomain.com"
+      - name: Checkout Helm Repo
+        uses: actions/checkout@v2
+        with:
+          repository: pacroy/helm-repo
+          path: 'helm-repo'
+          ssh-key: '${{ secrets.HELM_REPO_SSH_KEY }}'
+      - name: Publish Chart
+        shell: bash
+        run: |
+          sed -i -e "s/sha_to_be_replaced/${GITHUB_SHA:0:7}/g" Chart.yaml
+          cd helm-repo
+          helm package ..
+          helm repo index .
+          new_archive=$(git ls-files --other --exclude-standard | head -n 1)
+
+          git config --local user.email "github-actions[bot]@${GITHUB_REPOSITORY/\//.}"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -am "Add ${new_archive}"
+          if [ "${GITHUB_EVENT_NAME}" == 'push' -a "${GITHUB_REF}" == 'refs/heads/main' -a ${GITHUB_HEAD_REF} == "" ]; then
+            git push
+          fi
