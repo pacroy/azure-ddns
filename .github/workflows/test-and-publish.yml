@@ -27,7 +27,8 @@ jobs:
             --set updateIpCommand="dig +short myotherdomain.com"
       - name: Checkout Helm Repo
         uses: actions/checkout@v2
-        repository: pacory/helm-repo
+        with:
+          repository: pacroy/helm-repo
       - name: Publish Chart
         shell: bash
         run: |
