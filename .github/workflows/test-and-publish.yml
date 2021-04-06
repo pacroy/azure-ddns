@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Test Template
+      - name: Test Chart
         shell: bash
         run: |
           helm template test-release . \
@@ -31,7 +31,7 @@ jobs:
           repository: pacroy/helm-repo
           path: 'helm-repo'
           ssh-key: '${{ secrets.HELM_REPO_SSH_KEY }}'
-      - name: Publish Chart
+      - name: Package Chart
         shell: bash
         run: |
           sed -i -e "s/sha_to_be_replaced/${GITHUB_SHA:0:7}/g" Chart.yaml
@@ -44,6 +44,8 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -am "Add ${new_archive}"
-          if [ "${GITHUB_EVENT_NAME}" == 'push' -a "${GITHUB_REF}" == 'refs/heads/main' -a ${GITHUB_HEAD_REF} == "" ]; then
-            git push
-          fi
+      - name: Push Chart
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        shell: bash
+        run: |
+          git push
