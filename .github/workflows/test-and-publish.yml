@@ -1,4 +1,4 @@
-name: Test Helm Chart
+name: Test and Publish Chart
 
 on:
   workflow_dispatch:
@@ -25,4 +25,18 @@ jobs:
             --set dnsZone="mydomain.com" \
             --set recordNames="record1 record2" \
             --set updateIpCommand="dig +short myotherdomain.com"
+      - name: Checkout Helm Repo
+        uses: pacroy/helm-repo
+      - name: Publish Chart
+        shell: bash
+        run: |
+          echo "::group::Debug"
+          pwd
+          ls -Al
+          echo "::endgroup::"
+
+          sed -i -e "s/sha_to_be_replaced/${GITHUB_SHA:0:7}/g" Chart.yaml
+          cd helm-repo
+          helm package ..
+          helm repo index .
           
