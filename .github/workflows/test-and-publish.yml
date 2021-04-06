@@ -30,15 +30,15 @@ jobs:
         with:
           repository: pacroy/helm-repo
           path: 'helm-repo'
+          ssh-key: '${{ secrets.HELM_REPO_SSH_KEY }}'
       - name: Publish Chart
         shell: bash
         run: |
-          echo "::group::Debug"
-          pwd
-          ls -Al
-          echo "::endgroup::"
-
           sed -i -e "s/sha_to_be_replaced/${GITHUB_SHA:0:7}/g" Chart.yaml
           cd helm-repo
           helm package ..
           helm repo index .
+          new_archive=$(git ls-files --other --exclude-standard | head -n 1)
+          git add .
+          git commit -am "Add ${new_archive}"
+          [ "${{ github.event_name }}" == 'push' -a "${{ github.ref }}" == 'refs/heads/main' ] && git push
