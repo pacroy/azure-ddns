@@ -1,6 +1,6 @@
 # Helm Chart for azure-ddns
 
-[![Lint Code Base](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml) [![Test Helm Chart](https://github.com/pacroy/azure-ddns/actions/workflows/test.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/test.yml)
+[![Lint Code Base](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/linter.yml) [![Test and Publish Chart](https://github.com/pacroy/azure-ddns/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/pacroy/azure-ddns/actions/workflows/test-and-publish.yml)
 
 Helm Chart to update Azure DNS records to mimic Dynamic DNS service.
 

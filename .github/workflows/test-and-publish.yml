@@ -26,7 +26,8 @@ jobs:
             --set recordNames="record1 record2" \
             --set updateIpCommand="dig +short myotherdomain.com"
       - name: Checkout Helm Repo
-        uses: pacroy/helm-repo
+        uses: actions/checkout@v2
+        repository: pacory/helm-repo
       - name: Publish Chart
         shell: bash
         run: |
@@ -39,4 +40,3 @@ jobs:
           cd helm-repo
           helm package ..
           helm repo index .
-          
