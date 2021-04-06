@@ -48,4 +48,6 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         shell: bash
         run: |
+          cd helm-repo
           git push
+          
