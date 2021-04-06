@@ -5,7 +5,7 @@ type: application
 version: 0.2.0
 appVersion: "0.3.1"
 sources:
-  - https://github.com/pacroy/azure-ddns
+  - https://github.com/pacroy/azure-ddns-helm
 maintainers:
   - name: Par
     email: pacroy@gmail.com
