@@ -1,0 +1,17 @@
+# schedule of the CronJob, omit to use default '*/5 * * * *'
+schedule: "*/5 * * * *" # Every 5 minutes
+
+# AzureAD application ID or ID URI of service principal
+clientId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# Secret of service principal
+clientSecret: "your-client-secret"
+# AzureAD tenant ID
+tenantId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# Resource group of the DNS zone
+resourceGroup: "rg-mygroup"
+# DNS zone name
+dnsZone: "mydomain.com"
+# DNS record names, separated by space
+recordNames: "subdomain1 subdomain2"
+# Command to get the up-to-date IP, leave blank use default 'curl -fsSL ipv4.icanhazip.com'
+updateIpCommand: "dig +short myotherdomain.com"
