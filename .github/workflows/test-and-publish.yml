@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           helm template test-release . \
-            --values values.yaml
+            --values values-test.yaml
       - name: Checkout Helm Repo
         uses: actions/checkout@v2
         with:
@@ -35,6 +35,11 @@ jobs:
           helm package ..
           helm repo index .
           new_archive=$(git ls-files --other --exclude-standard | head -n 1)
+
+          if [ -z "$new_archive" ]; then
+            echo "::error::No new package file. Did you forget to bump up the chart version?"
+            exit 91
+          fi
 
           archive_size=$(stat --printf="%s" "$new_archive")
           max_size=${HELM_MAX_PACKAGE_SIZE:-100000}
